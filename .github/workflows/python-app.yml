@@ -4,13 +4,26 @@
 name: Python application
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+  workflow_dispatch:
+    inputs:
+      API_ID:
+        description: 'API ID'
+        required: true
+      API_HASH:
+        description: 'API HASH'
+        required: true
+      BOT_TOKEN:
+        description: 'Bot Token'
+        required: true
+      BOT_USERNAME:
+        description: 'Bot Username'
+        required: true
+      FDBURL:
+        description: 'Firebase URL'
+        required: true
+      LOG_CHNL:
+        description: 'Log Channel ID'
+        required: true
 
 jobs:
   build:
@@ -34,6 +47,6 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Test MissRaya
       run: |
-        pytest
+        python -m MissRaya
